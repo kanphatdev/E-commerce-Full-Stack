@@ -14,10 +14,24 @@
 | nodemon          | ^3.1.7    | Auto-restarting for Node.js apps   |
 | prisma           | ^5.21.0   | Database toolkit                   |
 
+
+## Provider and Tools
+
+| Tool              | Description                                 | Link                                            |
+|-------------------|---------------------------------------------|-------------------------------------------------|
+| MySQL Workbench   | Visual tool for MySQL database design       | [MySQL Workbench](https://www.mysql.com/products/workbench/) |
+| MySQL             | Open-source relational database management  | [MySQL](https://www.mysql.com/)                 |
+| Prisma            | Next-generation ORM for database management | [Prisma](https://www.prisma.io/)                |
+
+
+
+
+
 ## References
 
 | Resource                             | Episode                                                              |
 |-------------------------------------------------|--------------------------------------------------------------------|
-| create a api endpoint  | [EP 1](https://youtu.be/-gOvzR_wpk0?si=1BfAUA2g-y4m-ZmK)     |
+| create a api endpoint and database structure  | [EP 1](https://youtu.be/-gOvzR_wpk0?si=1BfAUA2g-y4m-ZmK)     |
+| create a layout and router | [EP 2](https://youtu.be/wtbj0KqLxvM?si=EZwZKOH_gRxYMIOe)     |
 
 
