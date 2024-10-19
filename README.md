@@ -35,5 +35,5 @@
 | create a layout and router | [EP 2](https://youtu.be/wtbj0KqLxvM?si=EZwZKOH_gRxYMIOe)     |
 | create a layout admin | [EP 3](https://youtu.be/EVEAO46Gw54?si=rKj-FmY95SRQXHJ8)     |
 | create a ProtectedRouteUser and ProtectedRouteAdmin | [EP 4](https://youtu.be/ArfRL2PWJS0?si=f6CJXVAmD2fHKEfu)     |
-
+| style a layout admin | [EP 5](https://youtu.be/xeHAzTije8I?si=EV0sdstDBP1orqA2)     |
 
