@@ -33,5 +33,6 @@
 |-------------------------------------------------|--------------------------------------------------------------------|
 | create a api endpoint and database structure  | [EP 1](https://youtu.be/-gOvzR_wpk0?si=1BfAUA2g-y4m-ZmK)     |
 | create a layout and router | [EP 2](https://youtu.be/wtbj0KqLxvM?si=EZwZKOH_gRxYMIOe)     |
+| create a layout admin | [EP 3](https://youtu.be/EVEAO46Gw54?si=rKj-FmY95SRQXHJ8)     |
 
 
