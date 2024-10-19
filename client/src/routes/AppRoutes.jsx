@@ -14,6 +14,8 @@ import Category from "../pages/admin/Category";
 import LayoutUser from "../layouts/LayoutUser";
 import Manage from "../pages/admin/Manage";
 import HomeUser from "../pages/user/HomeUser";
+import ProtectedRouteUser from "./ProtectedRoute";
+import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: <ProtectedRouteAdmin element={<AdminLayout />}/> ,
     children: [
       { index: true, element: <Dashboard /> },
       { path: "product", element: <Product /> },
@@ -40,7 +42,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <LayoutUser />,
+    // element: <LayoutUser />,
+    element: <ProtectedRouteUser element={<LayoutUser />} />,
     children: [
       { index: true, element: <HomeUser /> },
 
