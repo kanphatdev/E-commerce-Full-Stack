@@ -1,8 +1,11 @@
+import CategoryList from "../../components/admin/CategoryList"
 
 
 const Category = () => {
   return (
-    <div>Category</div>
+    <div>
+      <CategoryList/>
+    </div>
   )
 }
 

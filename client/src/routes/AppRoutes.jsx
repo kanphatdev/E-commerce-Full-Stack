@@ -16,10 +16,12 @@ import Manage from "../pages/admin/Manage";
 import HomeUser from "../pages/user/HomeUser";
 import ProtectedRouteUser from "./ProtectedRoute";
 import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
+import FormCategory from "../components/admin/FormCategory";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <Layout />, // Public layout
     children: [
       { index: true, element: <Home /> },
       { path: "shop", element: <Shop /> },
@@ -32,30 +34,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <ProtectedRouteAdmin element={<AdminLayout />}/> ,
+    element: <ProtectedRouteAdmin element={<AdminLayout />} />, // Protected admin routes
     children: [
       { index: true, element: <Dashboard /> },
       { path: "product", element: <Product /> },
       { path: "category", element: <Category /> },
       { path: "manage", element: <Manage /> },
+      { path: "add-category", element: <FormCategory /> },
     ],
   },
   {
     path: "/user",
-    // element: <LayoutUser />,
-    element: <ProtectedRouteUser element={<LayoutUser />} />,
+    element: <ProtectedRouteUser element={<LayoutUser />} />, // Protected user layout
     children: [
       { index: true, element: <HomeUser /> },
-
     ],
   },
+  {path: "add-category", element: <FormCategory />}
 ]);
+
 const AppRoutes = () => {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRoutes;

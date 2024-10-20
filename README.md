@@ -36,4 +36,5 @@
 | create a layout admin | [EP 3](https://youtu.be/EVEAO46Gw54?si=rKj-FmY95SRQXHJ8)     |
 | create a ProtectedRouteUser and ProtectedRouteAdmin | [EP 4](https://youtu.be/ArfRL2PWJS0?si=f6CJXVAmD2fHKEfu)     |
 | style a layout admin | [EP 5](https://youtu.be/xeHAzTije8I?si=EV0sdstDBP1orqA2)     |
+| create a CategoryList and FormCategory | [EP 6](https://youtu.be/EID3dNLHU30?si=9BZoHKgM-92ib0ai)     |
 
