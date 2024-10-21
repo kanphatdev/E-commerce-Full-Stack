@@ -1,46 +1,43 @@
 import { BookmarkPlus, BookmarkX } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEcomStore } from "../../store/EcomStore";
-import { listCategory, removeCategory } from "../../api/category";
-import { useEffect, useState } from "react";
+import { removeCategory } from "../../api/category";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const CategoryList = () => {
   const token = useEcomStore((state) => state.token);
-  const [categories, setCategories] = useState([]); // State to store categories
+  const categories = useEcomStore((state) => state.categories);
+  const getCategory = useEcomStore((state) => state.getCategory);
 
-  // Fetch categories from API
-  const getCategory = async () => {
-    try {
-      const res = await listCategory(token);
-      setCategories(res); // Set the fetched categories
-    } catch (error) {
-      toast.error("Error fetching categories");
-      console.error("Error fetching categories:", error);
-    }
-  };
-
+  // Fetch categories from API when the token is available
   useEffect(() => {
     if (token) {
-      getCategory(); // Fetch categories when token is available
+      getCategory(token); // Ensure token is passed to getCategory
     }
   }, [token]);
 
   // Handle category deletion
   const handleDelete = async (id) => {
     try {
-      await removeCategory(token, id); // Pass token first, then the id
+      // Add debug logging
+      console.log(`Attempting to delete category with ID: ${id}`);
+      
+      const response = await removeCategory(token, id); // Pass token first, then the id
+      console.log(`Deletion successful: ${response}`); // Log success for debugging
+      
       toast.success("Category deleted successfully!");
-      getCategory(); // Refresh the list after deletion
+      getCategory(token); // Refresh the list after deletion
     } catch (error) {
+      // Log the entire error for better debugging
+      console.error("Error deleting category:", error.response || error.message || error);
       toast.error("Failed to delete category.");
-      console.error("Error deleting category:", error);
     }
   };
 
   return (
     <>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 mx-4 py-4">
         <h1 className="text-2xl font-bold capitalize">Categories</h1>
 
         <Link to={"/admin/add-category/"}>
@@ -66,7 +63,7 @@ const CategoryList = () => {
               {categories.length > 0 ? (
                 categories.map((category, index) => (
                   <tr
-                    key={category.id || index} // Use index as fallback if id is missing
+                    key={category._id || index} // Use _id for MongoDB objects
                     className={index % 2 === 0 ? "bg-base-200" : ""}
                   >
                     <th>{index + 1}</th>
@@ -74,7 +71,7 @@ const CategoryList = () => {
                     <td>
                       <button
                         className="btn btn-ghost btn-xs"
-                        onClick={() => handleDelete(category.id)} // Use id for MongoDB objects
+                        onClick={() => handleDelete(category.id)} // Use _id for MongoDB objects
                       >
                         <BookmarkX className="text-rose-600" />
                       </button>

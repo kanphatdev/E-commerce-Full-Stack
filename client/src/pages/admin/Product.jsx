@@ -1,8 +1,11 @@
+import ProductList from "../../components/admin/ProductList"
 
 
 const Product = () => {
   return (
-    <div>Product</div>
+    <div>
+   <ProductList/>
+    </div>
   )
 }
 

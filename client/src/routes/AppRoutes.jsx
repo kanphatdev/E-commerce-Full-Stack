@@ -17,6 +17,7 @@ import HomeUser from "../pages/user/HomeUser";
 import ProtectedRouteUser from "./ProtectedRoute";
 import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
 import FormCategory from "../components/admin/FormCategory";
+import FormProduct from "../components/admin/FormProduct";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
       { path: "category", element: <Category /> },
       { path: "manage", element: <Manage /> },
       { path: "add-category", element: <FormCategory /> },
+      { path: "add-product", element: <FormProduct /> },
     ],
   },
   {
