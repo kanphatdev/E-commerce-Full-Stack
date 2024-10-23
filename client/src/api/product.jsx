@@ -28,8 +28,17 @@ export const createProduct = async (token, formData) => {
 // Function to list products
 
 
+
+
 export const listProduct = async (count = 20) => {
-  // code body
-  return await axios.get('http://localhost:5001/api/products/' + count)
-}
+  try {
+    // Make the request and return the response data
+    const response = await axios.get(`http://localhost:5000/api/products/${count}`);
+    return response.data; // Return only the data (assuming response is structured this way)
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw new Error("Failed to fetch products"); // Handle errors appropriately
+  }
+};
+
 

@@ -2,11 +2,10 @@ import { PackagePlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEcomStore } from "../../store/EcomStore";
 import { useEffect, useState } from "react";
-import axios from "axios"; // Import axios
 
 const ProductList = () => {
-  const token = useEcomStore((state) => state.token);
-  const [products, setProducts] = useState([]); // State to store products
+  const getProduct = useEcomStore((state) => state.getProduct); // Get the action from the store
+  const products = useEcomStore((state) => state.products); // Get products from the store
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
   const [quantity, setQuantity] = useState(30); // Default quantity
@@ -16,12 +15,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
       setLoading(true); // Start loading
       try {
-        const response = await axios.get(`http://localhost:5000/api/products/${quantity}`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Ensure token is passed correctly
-          },
-        });
-        setProducts(response.data); // Set fetched products to state
+        await getProduct(quantity); // Use the action to get products
       } catch (err) {
         console.error("Error fetching products:", err);
         setError("Failed to load products");
@@ -31,11 +25,15 @@ const ProductList = () => {
     };
 
     fetchProducts(); // Call the function to fetch products
-  }, [token, quantity]); // Dependency array to rerun effect if token or quantity changes
+  }, [getProduct, quantity]); // Dependency array to rerun effect if quantity changes
 
   // Render loading or error message
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <span className="loading loading-bars loading-md"></span>
+      </>
+    );
   }
 
   if (error) {
@@ -56,16 +54,23 @@ const ProductList = () => {
 
       {/* Input field for quantity */}
       <div className="flex items-center mx-4 my-2">
-        <label htmlFor="quantity" className="mr-2">Number of Products:</label>
+        <label htmlFor="quantity" className="mr-2">
+          Number of Products:
+        </label>
         <input
           type="number"
           id="quantity"
           min="1"
           value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
+          onChange={(e) => setQuantity(Number(e.target.value))} // Convert input to number
           className="input input-bordered w-24"
         />
-        <button onClick={() => setQuantity(quantity)} className="btn btn-primary ml-2">Fetch</button>
+        <button
+          onClick={() => getProduct(quantity)}
+          className="btn btn-primary ml-2"
+        >
+          Fetch
+        </button>
       </div>
 
       <div className="overflow-x-auto">
@@ -92,8 +97,14 @@ const ProductList = () => {
                   <td>${product.price.toFixed(2)}</td> {/* Product price */}
                   <td>{product.quantity}</td> {/* Product quantity */}
                   <td>{product.sold}</td> {/* Sold items */}
-                  <td>{new Date(product.createdAt).toLocaleDateString()}</td> {/* Created date */}
-                  <td>{new Date(product.updatedAt).toLocaleDateString()}</td> {/* Updated date */}
+                  <td>
+                    {new Date(product.createdAt).toLocaleDateString()}
+                  </td>{" "}
+                  {/* Created date */}
+                  <td>
+                    {new Date(product.updatedAt).toLocaleDateString()}
+                  </td>{" "}
+                  {/* Updated date */}
                 </tr>
               ))
             ) : (

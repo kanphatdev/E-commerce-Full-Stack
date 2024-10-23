@@ -3,39 +3,18 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { toast } from "react-toastify";
 import { listCategory } from "../api/category";
+import { listProduct } from "../api/product";
 
 const ecomStore = (set) => ({
   user: null,
   token: null,
   categories: [],
-  products: [], // Add products state
-  loading: false, // Add loading state
-  error: null, // Add error state
-
-  // Action to fetch products
-  fetchProducts: async (quantity) => {
-    set({ loading: true }); // Start loading
-    try {
-      const token = get().token; // Get the current token
-      const response = await axios.get(`http://localhost:5000/api/products/${quantity}`, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Ensure token is passed correctly
-        },
-      });
-      set({ products: response.data, error: null }); // Set fetched products to state
-    } catch (err) {
-      console.error("Error fetching products:", err);
-      set({ error: "Failed to load products" });
-    } finally {
-      set({ loading: false }); // Stop loading regardless of success or failure
-    }
-  },
+  products: [],
 
   // Action to login a user
   actionLogin: async (formData) => {
     try {
       const res = await axios.post("http://localhost:5000/api/login", formData);
-
       if (res.status === 200 && res.data) {
         set({
           user: res.data.payload,  // Assuming payload contains user information
@@ -55,7 +34,6 @@ const ecomStore = (set) => ({
   actionRegister: async (formData, navigate) => {
     try {
       const res = await axios.post("http://localhost:5000/api/register", formData);
-
       if (res.status === 200) {
         toast.success("Registration successful!");
         navigate("/login"); // Redirect to login after successful registration
@@ -79,6 +57,18 @@ const ecomStore = (set) => ({
       console.error("Error fetching categories:", error);
       set({ categories: [] }); // Set categories to an empty array if there's an error
       return [];
+    }
+  },
+
+  // Action to fetch products
+  getProduct: async (count = 20) => { // Default count to 20 if not provided
+    set({ products: [] }); // Reset products state before fetching
+    try {
+      const productData = await listProduct(count); // Fetch products from API
+      set({ products: productData }); // Update state with the fetched products
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      toast.error("Failed to load products"); // Notify user of the error
     }
   },
 });

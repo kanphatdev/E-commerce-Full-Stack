@@ -38,4 +38,6 @@
 | style a layout admin | [EP 5](https://youtu.be/xeHAzTije8I?si=EV0sdstDBP1orqA2)     |
 | create a CategoryList and FormCategory | [EP 6](https://youtu.be/EID3dNLHU30?si=9BZoHKgM-92ib0ai)     |
 | create a ProductList and FormProduct | [EP7](https://youtu.be/sbnM68dj9vs?si=sgbxsjsB_0W4j9RS)     |
+| create a upload image function | [EP8](https://youtu.be/p9-GgtEPxEE?si=OMuVHHBHID2DssY_)     |
+
 
