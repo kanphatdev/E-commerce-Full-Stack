@@ -42,5 +42,6 @@
 | create a remove image function | [EP9](https://youtu.be/T8zn4szQ5Ck?si=04v_iI7ZRysj7ABx)     |
 | create a FormEditProduct and display image to table | [EP10](https://youtu.be/-pbd_fGVji8?si=XrR5Dlnz3t8U5SRE)     |
 | delete product and image from cloudinary | [EP11](https://youtu.be/cc90fYjVWyQ?si=x-ICtCrmYUHiwbCp)     |
+| create upload file Loader  | [EP12](https://youtu.be/Jxtf3C6jEOE?si=Lc-5NNymVCY0nsFn)     |
 
 

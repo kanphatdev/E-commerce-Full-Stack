@@ -70,7 +70,7 @@ const UploadFile = ({ form, setForm }) => {
     return (
         <div className='my-4'>
             <div className='flex flex-wrap gap-4 my-4'>
-                {isLoading && <Loader className='w-16 h-16 animate-spin text-blue-500' />}
+                {isLoading && <Loader className='w-16 h-16 animate-spin text-success' />}
 
                 {form.images && form.images.map((item, index) => (
                     <div className='relative' key={index}>
