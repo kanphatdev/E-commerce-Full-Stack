@@ -5,10 +5,10 @@ import { toast } from "react-toastify";
 import UploadFile from "./UploadFile";
 
 const initialState = {
-  title: "product title",
-  description: "product description",
-  price: 10000,
-  quantity: 10,
+  title: "",
+  description: "",
+  price: 0,
+  quantity: 0,
   categoryId: 31,
   images: [],
 };
@@ -18,7 +18,7 @@ const FormProduct = () => {
   const getCategory = useEcomStore((state) => state.getCategory);
   const categories = useEcomStore((state) => state.categories);
   const [form, setForm] = useState(initialState);
-
+  const getProduct = useEcomStore((state) => state.getProduct);
   useEffect(() => {
     getCategory(token);
   }, [getCategory, token]);
@@ -35,6 +35,8 @@ const FormProduct = () => {
     try {
       const res = await createProduct(token, form);
       toast.success("Created " + res.data.title + " successfully");
+      setForm(initialState)
+      getProduct(token)
     } catch (error) {
       console.log(error);
       toast.error("Failed to create product");

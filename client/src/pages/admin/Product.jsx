@@ -2,19 +2,31 @@ import { useEffect } from "react";
 import FormProduct from "../../components/admin/FormProduct";
 import useEcomStore from "../../store/ecomerce-store";
 import { PackageSearch, PackageX } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { deleteProduct } from "../../api/product";
 
 const Product = () => {
   const token = useEcomStore((state) => state.token);
   const getProduct = useEcomStore((state) => state.getProduct);
   const getCategory = useEcomStore((state) => state.getCategory);
   const products = useEcomStore((state) => state.products);
-
+const navigate = useNavigate()
   useEffect(() => {
     getCategory(token);
     getProduct(token, 30); // Assuming `30` is the categoryId or limit for fetching products
   }, [getCategory, getProduct, token]);
+const handleDelete = async (id) => {
+  try {
+    const res = await deleteProduct(token,id)
+    toast.success("Product deleted successfully")
+    getProduct(token, 30);
+  } catch (error) {
+    toast.error(error)
+  }
 
+  
+}
   return (
     <div className="p-6">
       <FormProduct />
@@ -57,7 +69,8 @@ const Product = () => {
                   <td className="p-2">{product.quantity}</td>
                   <td className="p-2">
                     <div className="flex gap-2">
-                      <button className="btn btn-xs btn-error text-white">
+
+                      <button className="btn btn-xs btn-error text-white" onClick={() => handleDelete(product.id)}>
                         <PackageX className="w-4 h-4" />
                       </button>
                       <button className="btn btn-xs btn-info text-white">
