@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useEcomStore } from "../store/EcomStore";
+
 import { currentUser } from "../api/auth";
 import LoadingToRedirect from "./LoadingToRedirect";
+import useEcomStore from "../store/ecomerce-store";
 
 const ProtectedRouteUser = ({ element }) => {
   const [ok, setOk] = useState(false); // use 'ok' in lowercase for consistency

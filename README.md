@@ -40,5 +40,6 @@
 | create a ProductList and FormProduct | [EP7](https://youtu.be/sbnM68dj9vs?si=sgbxsjsB_0W4j9RS)     |
 | create a upload image function | [EP8](https://youtu.be/p9-GgtEPxEE?si=OMuVHHBHID2DssY_)     |
 | create a remove image function | [EP9](https://youtu.be/T8zn4szQ5Ck?si=04v_iI7ZRysj7ABx)     |
+| create a FormEditProduct and display image to table | [EP10](https://youtu.be/-pbd_fGVji8?si=XrR5Dlnz3t8U5SRE)     |
 
 

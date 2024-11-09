@@ -1,92 +1,68 @@
+import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useEcomStore } from "../../store/EcomStore"; // Import the store
 import { toast } from "react-toastify";
 
 const Register = () => {
-  const actionRegister = useEcomStore((state) => state.actionRegister); // Access register action from store
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const handleOnChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-      toast.warn("Passwords do not match!");
-      return;
+    if (form.password !== form.confirmPassword) {
+      toast.warning("Warning: Confirm Password does not match.");
+      return; // Stop further execution if passwords do not match
     }
 
-    // Call the register action from the store
-    await actionRegister(formData, navigate);
+    try {
+      const res = await axios.post("http://localhost:5000/api/register", form);
+      toast.success("Registration successful!");
+      console.log(res);
+    } catch (error) {
+      toast.error(`Error: ${error.response?.data?.message || error.message}`);
+    }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-base-200">
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-center">Register</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="input input-bordered"
-                name="email"
-                value={formData.email}
-                onChange={handleOnChange}
-              />
-            </div>
-
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                className="input input-bordered"
-                name="password"
-                value={formData.password}
-                onChange={handleOnChange}
-              />
-            </div>
-
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">Confirm Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="Confirm your password"
-                className="input input-bordered"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleOnChange}
-              />
-            </div>
-
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
-                Register
-              </button>
-            </div>
-          </form>
-        </div>
+    <div className="flex justify-center items-center min-h-screen bg-base-100">
+      <div className="w-full max-w-md p-8 space-y-4 rounded-lg shadow-md bg-neutral">
+        <h2 className="text-2xl font-bold text-center text-primary">Register</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            name="email"
+            className="input input-bordered w-full"
+            placeholder="Enter email"
+            onChange={handleOnChange}
+            value={form.email}
+          />
+          <input
+            type="password"
+            name="password"
+            className="input input-bordered w-full"
+            placeholder="Enter password"
+            onChange={handleOnChange}
+            value={form.password}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            onChange={handleOnChange}
+            className="input input-bordered w-full"
+            value={form.confirmPassword}
+          />
+          <button className="btn btn-primary w-full" type="submit">Sign Up</button>
+        </form>
       </div>
     </div>
   );

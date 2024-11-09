@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import useEcomStore from "../../store/ecomerce-store";
-import { createProduct } from "../../api/product";
+import { readProduct, updateProduct } from "../../api/product";
 import { toast } from "react-toastify";
 import UploadFile from "./UploadFile";
+import { useNavigate, useParams } from "react-router-dom";
 
 const initialState = {
   title: "product title",
@@ -13,16 +14,26 @@ const initialState = {
   images: [],
 };
 
-const FormProduct = () => {
+const FormEditProduct = () => {
   const token = useEcomStore((state) => state.token);
   const getCategory = useEcomStore((state) => state.getCategory);
   const categories = useEcomStore((state) => state.categories);
   const [form, setForm] = useState(initialState);
-
+  const { id } = useParams();
+  const navigate =useNavigate()
   useEffect(() => {
     getCategory(token);
+    fetchProduct(token, id);
   }, [getCategory, token]);
-
+  const fetchProduct = async (token, id) => {
+    try {
+      const res = await readProduct(token, id);
+      console.log(res);
+      setForm(res.data);
+    } catch (error) {
+      toast.error(error.massage);
+    }
+  };
   const handleOnChange = (e) => {
     setForm({
       ...form,
@@ -33,8 +44,9 @@ const FormProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await createProduct(token, form);
-      toast.success("Created " + res.data.title + " successfully");
+      const res = await updateProduct(token, id, form);
+      toast.success("updated " + res.data.title + " successfully");
+      navigate("/admin/product")
     } catch (error) {
       console.log(error);
       toast.error("Failed to create product");
@@ -43,7 +55,9 @@ const FormProduct = () => {
 
   return (
     <div className="p-6 bg-secondary rounded-lg shadow-md w-full max-w-lg mx-auto mt-6">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Add Product</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center capitalize">
+        edit Product
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="form-control">
           <label className="label">
@@ -121,14 +135,14 @@ const FormProduct = () => {
             ))}
           </select>
         </div>
-        
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Upload Product Image</span>
           </label>
-          <UploadFile form={form} setForm={setForm}/>
+          <UploadFile form={form} setForm={setForm} />
         </div>
-        
+
         <button type="submit" className="btn btn-success w-full mt-4">
           Add Product
         </button>
@@ -137,4 +151,4 @@ const FormProduct = () => {
   );
 };
 
-export default FormProduct;
+export default FormEditProduct;

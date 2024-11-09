@@ -1,44 +1,55 @@
 import axios from "axios";
 
-// Function to create a product
-export const createProduct = async (token, formData) => {
-  if (!token) {
-    throw new Error("No authorization token provided"); // Check for token
-  }
+export const createProduct = async (token, form) => {
+  return axios.post("http://localhost:5000/api/product", form, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-  try {
-    const response = await axios.post(
-      "http://localhost:5000/api/product",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`, // Ensure token is passed correctly
-        },
+export const listProduct = async (token, count = 20) => {
+  return axios.get("http://localhost:5000/api/products/" + count, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const readProduct = async (token, id) => {
+  return axios.get("http://localhost:5000/api/product/" + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const updateProduct = async (token, id,form) => {
+  return axios.put("http://localhost:5000/api/product/" + id,form, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const uploadFiles = async (token, form) => {
+  // code 
+  // console.log('form api frontent', form)
+  return axios.post('http://localhost:5000/api/images', {
+      image: form
+  }, {
+      headers: {
+          Authorization: `Bearer ${token}`
       }
-    );
-    return response.data; // Return the actual response data
-  } catch (error) {
-    console.error("Error creating product:", error);
+  })
+}
 
-    // Throw a more meaningful error message for better error handling
-    throw error.response?.data?.message || "Error creating product";
-  }
-};
-
-// Function to list products
-
-
-
-
-export const listProduct = async (count = 20) => {
-  try {
-    // Make the request and return the response data
-    const response = await axios.get(`http://localhost:5000/api/products/${count}`);
-    return response.data; // Return only the data (assuming response is structured this way)
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    throw new Error("Failed to fetch products"); // Handle errors appropriately
-  }
-};
-
-
+export const removeFiles = async (token, public_id) => {
+  // code 
+  // console.log('form api frontent', form)
+  return axios.post('http://localhost:5000/api/removeimages', {
+      public_id
+  }, {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  })
+}

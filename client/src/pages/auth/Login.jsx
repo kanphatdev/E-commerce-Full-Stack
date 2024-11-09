@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEcomStore } from "../../store/EcomStore";
+
 import { toast } from "react-toastify";
+import useEcomStore from "../../store/ecomerce-store";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,12 +24,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await actionLogin(formData);  // Pass formData to the actionLogin function
-
-      if (res.status === 200) {
+const role = res.data.payload.role;
+      if (res.status === 200 || res.status === 201) {
         toast.success("Login successful!");
 
         // Redirect based on user role
-        const role = res.data.payload.role;
+        
         roleRedirect(role);
       } else {
         toast.error(res.data.message || "Login failed. Please check your credentials.");

@@ -1,5 +1,5 @@
-import  { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const LoadingToRedirect = () => {
   const [count, setCount] = useState(5);
@@ -15,8 +15,6 @@ const LoadingToRedirect = () => {
         return currentCount - 1;
       });
     }, 1000);
-
-    // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(interval);
   }, []);
 
@@ -25,9 +23,13 @@ const LoadingToRedirect = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-base-200">
-      <h2 className="text-lg font-semibold mb-4">Redirecting in {count} seconds...</h2>
-      <progress className="progress progress-accent w-56" value={5 - count} max="5"></progress>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <progress
+        className="progress progress-success w-56 mb-4"
+        value={(5 - count) * 20}
+        max="100"
+      ></progress>
+      <p className="text-lg text-gray-700 ">No permission. Redirecting in {count}...</p>
     </div>
   );
 };

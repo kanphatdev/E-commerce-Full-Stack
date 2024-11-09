@@ -1,11 +1,13 @@
-import AppRoutes from "./routes/AppRoutes"
+import AppRoute from "./routes/AppRoute"
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   return (
-    <div>
-       <ToastContainer />
-      <AppRoutes/>
+    <div className="">
+      <AppRoute/>
+      <ToastContainer />
     </div>
   )
 }
