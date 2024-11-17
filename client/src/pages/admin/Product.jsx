@@ -11,16 +11,16 @@ const Product = () => {
   const getProduct = useEcomStore((state) => state.getProduct);
   const getCategory = useEcomStore((state) => state.getCategory);
   const products = useEcomStore((state) => state.products);
-const navigate = useNavigate()
+
   useEffect(() => {
-    getCategory(token);
-    getProduct(token, 30); // Assuming `30` is the categoryId or limit for fetching products
+    getCategory();
+    getProduct( 30); // Assuming `30` is the categoryId or limit for fetching products
   }, [getCategory, getProduct, token]);
 const handleDelete = async (id) => {
   try {
     const res = await deleteProduct(token,id)
     toast.success("Product deleted successfully")
-    getProduct(token, 30);
+    getProduct( 30);
   } catch (error) {
     toast.error(error)
   }

@@ -26,9 +26,9 @@ const ecomStore = (set) => ({
       return { error: error.message || "Login failed" };
     }
   },
-   getCategory : async (token) => {
+   getCategory : async () => {
     try {
-      const res = await ListCategory(token);
+      const res = await ListCategory();
       set({categories:res.data});
       console.log(res.data);
     } catch (error) {
@@ -36,9 +36,9 @@ const ecomStore = (set) => ({
       toast.error("Failed to load categories");
     }
   },
-  getProduct : async (token,count) => {
+  getProduct : async (count) => {
     try {
-      const res = await listProduct(token,count);
+      const res = await listProduct(count);
       set({products:res.data});
       console.log(res.data);
     } catch (error) {

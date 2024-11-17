@@ -8,12 +8,8 @@ export const createCategory = async (token,form) => {
     })
 } 
 
-export const ListCategory = async (token) => {
-    return axios.get('http://localhost:5000/api/category',   {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+export const ListCategory = async () => {
+    return axios.get('http://localhost:5000/api/category')
 }
 export const RemoveCategory = async (token,id) => {
     return axios.delete('http://localhost:5000/api/category/'+id,   {

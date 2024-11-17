@@ -20,7 +20,7 @@ const FormProduct = () => {
   const [form, setForm] = useState(initialState);
   const getProduct = useEcomStore((state) => state.getProduct);
   useEffect(() => {
-    getCategory(token);
+    getCategory();
   }, [getCategory, token]);
 
   const handleOnChange = (e) => {
@@ -36,7 +36,7 @@ const FormProduct = () => {
       const res = await createProduct(token, form);
       toast.success("Created " + res.data.title + " successfully");
       setForm(initialState)
-      getProduct(token)
+      getProduct()
     } catch (error) {
       console.log(error);
       toast.error("Failed to create product");

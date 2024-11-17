@@ -22,7 +22,7 @@ const FormEditProduct = () => {
   const { id } = useParams();
   const navigate =useNavigate()
   useEffect(() => {
-    getCategory(token);
+    getCategory();
     fetchProduct(token, id);
   }, [getCategory, token]);
   const fetchProduct = async (token, id) => {
