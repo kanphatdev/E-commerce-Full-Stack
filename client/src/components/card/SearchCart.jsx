@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import useEcomStore from "../../store/ecomerce-store";
 import { BookMarked } from "lucide-react";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 const SearchCart = () => {
   const getProduct = useEcomStore((state) => state.getProduct);
   const products = useEcomStore((state) => state.products);
@@ -16,14 +18,15 @@ const SearchCart = () => {
 
   const [text, setText] = useState("");
   const [categorySelected, setCategorySelected] = useState([]);
+  const [price, setPrice] = useState([1000, 10000]);
+  const [ok, setOK] = useState(false);
   // Step 1: Search by text function
   useEffect(() => {
     const delay = setTimeout(() => {
-     
       if (text) {
         actionsearchFilters({ query: text });
-      }else{
-         getProduct(30);
+      } else {
+        getProduct(30);
       }
     }, 300);
 
@@ -42,16 +45,28 @@ const SearchCart = () => {
     } else {
       inState.slice(findCheck, 1);
     }
-    setCategorySelected(inState)
-  
+    setCategorySelected(inState);
+
     if (inState > 0) {
-        actionsearchFilters({category:inState})
-    }else{
-      getProduct()
+      actionsearchFilters({ category: inState });
+    } else {
+      getProduct();
     }
   };
   console.log(categorySelected);
-  
+
+  // Step 3: Search by price function
+  useEffect(() => {
+    actionsearchFilters({ price });
+  }, [ok]);
+  const handlePrice = (value) => {
+    console.log(value);
+    setPrice(value);
+    setTimeout(() => {
+      setOK(!ok);
+    }, 300);
+  };
+
   return (
     <div>
       <h1 className="capitalize text-lg font-bold mb-4">Find the Product</h1>
@@ -79,6 +94,44 @@ const SearchCart = () => {
               <span className="badge capitalize">{item.name}</span>
             </div>
           ))}
+        </div>
+      </div>
+      <div className="divider"></div>
+      <div className="">
+        <h1 className="text-xl mb-4 capitalize font-bold px-2">
+          find the product price
+        </h1>
+        <div className="">
+          <div className="mb-4 flex justify-between">
+            <div className="">
+              <span className="badge badge-success capitalize">
+                min:<span className="font-bold">{price[0]}</span>
+              </span>
+            </div>
+            <div className="">
+              <span className="badge badge-error capitalize">
+                max: <span className="font-bold">{price[1]}</span>
+              </span>
+            </div>
+          </div>
+
+          <Slider
+            onChange={handlePrice}
+            range
+            min={0}
+            max={300000}
+            defaultValue={[1000, 100000]}
+            trackStyle={{ backgroundColor: "#588157", height: 10 }}
+            railStyle={{ backgroundColor: "#3a5a40", height: 10 }}
+            handleStyle={{
+              borderColor: "#dad7cd",
+              height: 20,
+              width: 20,
+              marginLeft: -10,
+              marginTop: -5,
+              backgroundColor: "#a3b18a",
+            }}
+          />
         </div>
       </div>
     </div>
