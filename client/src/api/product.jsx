@@ -19,9 +19,6 @@ export const readProduct = async (token, id) => {
     },
   });
 };
-
-
-
 export const deleteProduct = async (token, id) => {
   return axios.delete("http://localhost:5000/api/product/" + id, {
     headers: {
@@ -59,3 +56,6 @@ export const removeFiles = async (token, public_id) => {
       }
   })
 }
+export const searchFilters = async ( arg) => {
+  return axios.post("http://localhost:5000/api/search/filters" ,arg);
+};

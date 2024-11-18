@@ -44,5 +44,6 @@
 | delete product and image from cloudinary | [EP11](https://youtu.be/cc90fYjVWyQ?si=x-ICtCrmYUHiwbCp)     |
 | create upload file Loader  | [EP12](https://youtu.be/Jxtf3C6jEOE?si=Lc-5NNymVCY0nsFn)     |
 | display products list  | [EP13](https://youtu.be/eE_2wQZUWbs?si=sDII6Xqk9lXbpOo6)     |
+| create Search by text function  | [EP14](https://youtu.be/r0MOZqoNWqc?si=1ZjABE-YMG8ZQLkA)     |
 
 

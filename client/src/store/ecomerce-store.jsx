@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { ListCategory } from "../api/Category";
 import { toast } from "react-toastify";
-import { listProduct } from "../api/product";
+import { listProduct, searchFilters } from "../api/product";
 const ecomStore = (set) => ({
   user: null,
   token: null,
@@ -45,7 +45,17 @@ const ecomStore = (set) => ({
       console.log(error);
       toast.error("Failed to load categories");
     }
-  }
+  },
+  actionsearchFilters : async (arg) => {
+    try {
+      const res = await searchFilters(arg);
+      set({products:res.data});
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to load searchFilters");
+    }
+  },
 });
 const usePersist = {
   name: "ecom-stores",
