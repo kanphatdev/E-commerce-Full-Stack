@@ -47,5 +47,6 @@
 | create Search by text function  | [EP14](https://youtu.be/r0MOZqoNWqc?si=1ZjABE-YMG8ZQLkA)     |
 | create  Search by categories function  | [EP15](https://youtu.be/yDDOuYtcxX0?si=VWHvx4buDUbf3frl)     |
 | create  Search by price function  | [EP16](https://youtu.be/nK3EsT5ajqU?si=IgnLsKOTenaeBUvD)     |
+| create  a Shopping Cart UI  | [EP16](https://youtu.be/nK3EsT5ajqU?si=IgnLsKOTenaeBUvD)     |
 
 

@@ -47,7 +47,7 @@ const SearchCart = () => {
     }
     setCategorySelected(inState);
 
-    if (inState > 0) {
+    if (inState.length > 0) {
       actionsearchFilters({ category: inState });
     } else {
       getProduct();
