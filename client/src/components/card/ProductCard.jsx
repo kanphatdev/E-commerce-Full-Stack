@@ -1,6 +1,9 @@
 import { BookX, ShoppingBasket } from "lucide-react";
+import useEcomStore from "../../store/ecomerce-store";
+
 
 const ProductCard = ({ item }) => {
+  const actionAddtoCart = useEcomStore( (state) =>state.actionAddtoCart )
   return (
     <div className="card rounded-md shadow-md card-compact bg-base-300 w-80 ">
       <div className="card-body ">
@@ -31,7 +34,7 @@ const ProductCard = ({ item }) => {
           <p className="text-xs py-4">{item.description}</p>
         </div>
         <div className="card-actions">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" onClick={() => actionAddtoCart(item)}>
             Buy Now <ShoppingBasket />
           </button>
         </div>
