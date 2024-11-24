@@ -1,9 +1,11 @@
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react";
 import useEcomStore from "../../store/ecomerce-store";
-
+import { Link } from "react-router-dom";
 const CartCard = () => {
   const carts = useEcomStore((state) => state.carts);
-  const actionRemoveProduct = useEcomStore((state) => state.actionRemoveProduct);
+  const actionRemoveProduct = useEcomStore(
+    (state) => state.actionRemoveProduct
+  );
   const getTotalPrice = useEcomStore((state) => state.getTotalPrice);
   const actionUpdateQuantity = useEcomStore(
     (state) => state.actionUpdateQuantity
@@ -19,18 +21,32 @@ const CartCard = () => {
             <div className="flex justify-between mb-4">
               {/* Left */}
               <div className="flex gap-4 items-center">
-                <div className="avatar placeholder">
-                  <div className="w-16 h-16 bg-emerald-200 rounded-md flex items-center justify-center text-gray-700">
-                    No Image
+                {item.images && item.images.length > 0 ? (
+                  <div className="avatar placeholder h-16  w-16">
+                    <img
+                      src={item.images[0].url}
+                      alt=""
+                      className="w-full h-full object-cover  hover:scale-105 duration-200 transition rounded-md"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div className="avatar placeholder">
+                    <div className="w-16 h-16 bg-emerald-200 rounded-md flex items-center justify-center text-gray-700">
+                      No Image
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <p className="font-bold text-lg">{item.title} </p>
                   <p className="text-sm text-gray-600">{item.description} </p>
                 </div>
               </div>
               {/* Right */}
-              <button className="btn btn-error btn-xs" onClick={() => actionRemoveProduct(item.id)}>
+              <button
+                className="btn btn-error btn-xs"
+                onClick={() => actionRemoveProduct(item.id)}
+              >
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
@@ -62,14 +78,18 @@ const CartCard = () => {
         ))}
 
         {/* Total */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between ">
           <span className="capitalize font-bold text-lg">Total</span>
-          <span className="font-bold text-lg text-neutral">฿{getTotalPrice()}</span>
+          <span className="font-bold text-lg text-neutral">
+            ฿{getTotalPrice()}
+          </span>
         </div>
         {/* Payment Button */}
-        <button className="btn btn-success btn-wide flex items-center gap-2">
-          Proceed with Payment <ShoppingCart className="w-5 h-5" />
-        </button>
+        <Link to={"/cart"} className="space-y-4">
+          <button className="btn btn-success btn-block flex items-center gap-2">
+            Proceed with Payment <ShoppingCart className="w-5 h-5" />
+          </button>
+        </Link>
       </div>
     </div>
   );

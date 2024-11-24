@@ -16,6 +16,8 @@ const ecomStore = (set, get) => ({
     const updateCart = [...carts, { ...product, count: 1 }];
     // Step Uniqe
     const uniqe = _.unionWith(updateCart, _.isEqual);
+    console.log(uniqe);
+    
     set({ carts: uniqe });
   },
   actionRemoveProduct: (productId) => {

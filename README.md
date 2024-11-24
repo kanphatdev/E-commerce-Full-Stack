@@ -43,3 +43,4 @@
 | create Search by price function                     | [EP16](https://youtu.be/nK3EsT5ajqU?si=IgnLsKOTenaeBUvD) |
 | create a Shopping Cart UI                           | [EP17](https://youtu.be/yvmztbDdwY4?si=kAjzsh56RIh1R6kR) |
 | create a Shopping Cart function and reduce price                           | [EP18](https://youtu.be/Y_sZOGL0THQ?si=3yYMfzJoHTXx3R8D) |
+| create a Shopping Cart Summary UI and display total net                         | [EP19](https://youtu.be/zoEgIhrY4cU?si=crKbeluHt7Uy77yk) |
