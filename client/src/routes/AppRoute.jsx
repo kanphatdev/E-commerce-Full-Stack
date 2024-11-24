@@ -18,6 +18,7 @@ import ManageOrders from "../pages/admin/ManageOrders";
 import ProtectedRouteUser from "./ProtectedRouteUser";
 import ProtectedRouteAdmin from "./ProtectedRouteAdmin";
 import Product from "../pages/admin/Product";
+import Payment from "../pages/users/Payment";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
    
     children: [
       { index: true, element: <HomeUser /> },
+      { path: 'payment', element: <Payment /> },
       { path: "history", element: <History /> },
     ],
   },

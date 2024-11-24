@@ -46,3 +46,4 @@
 | create a Shopping Cart Summary UI and display total net                 | [EP19](https://youtu.be/zoEgIhrY4cU?si=crKbeluHt7Uy77yk) |
 | connect Cart Summary UI to backend and create a handleSaveCart function | [EP20](https://youtu.be/xTW00l4jjuc?si=2ACB9IYuyg1WO2Ut) |
 | create a Checkout UI and add responsive                                 | [EP21](https://youtu.be/w0SPacAVyW4?si=a9ysgxbAWyW8O80n) |
+| create a SaveAddress function                              | [EP22](https://youtu.be/S9WO7jsmCGM?si=aq6N1VCJN5aLLfmn) |

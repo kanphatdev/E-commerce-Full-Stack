@@ -1,13 +1,15 @@
 import { Outlet } from "react-router-dom"
+import Mainnav from "../components/Mainnav"
 
 
 const LayoutUser = () => {
   return (
     <div>
-      <h1 className="text-2xl">
-        nav
-      </h1>
-         <Outlet/>
+     <Mainnav/>
+      <main className="h-full px-4 mt-2 mx-auto">
+        <Outlet/>
+      </main>
+        
     </div>
   )
 }
