@@ -46,7 +46,7 @@ const role = res.data.payload.role;
     if (role === "admin") {
       navigate("/admin");
     } else {
-      navigate("/user");
+      navigate(-1);
     }
   };
 

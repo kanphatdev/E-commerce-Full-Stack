@@ -1,25 +1,41 @@
-import { Asterisk, BaggageClaim, Gift, ListCheck } from "lucide-react";
+import { Asterisk, BaggageClaim, Gift, Key, ListCheck } from "lucide-react";
 import useEcomStore from "../../store/ecomerce-store";
-import { Link } from "react-router-dom";
-
+import { Link,useNavigate } from "react-router-dom";
+import { createUserCart } from "../../api/user";
+import { toast } from "react-toastify";
 const ListCart = () => {
-  const carts = useEcomStore((state) => state.carts);
+  const cart = useEcomStore((state) => state.carts);
   const getTotalPrice = useEcomStore((state) => state.getTotalPrice);
+  const user = useEcomStore((state) => state.user);
+  const token = useEcomStore((state) => state.token);
+const navigate = useNavigate()
+
+  const handleSaveCart = async () => {
+    await createUserCart(token, { cart })
+      .then((res) => {
+        toast.success("Cart saved successfully")
+        navigate("/checkout")
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="p-4 space-y-4">
       {/* Header */}
       <div className="text-center md:text-left">
         <p className="capitalize text-2xl font-bold mb-4 flex gap-2 items-center justify-center md:justify-start">
-          Product List <ListCheck className="w-6 h-6" />
+          Product List({cart.length}) <ListCheck className="w-6 h-6" />
         </p>
       </div>
 
       {/* List */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* left */}
-        <div className="col-span-2">
+        <div className="col-span-2 space-y-4">
           {/* Card */}
-          {carts.map((item, index) => (
+          {cart.map((item, index) => (
             <div
               className="card shadow-md bg-warning rounded-lg p-4"
               key={index}
@@ -53,7 +69,7 @@ const ListCart = () => {
                 </div>
                 {/* Right */}
                 <div className="font-bold text-neutral text-lg flex items-center justify-center">
-                  ฿ {item.price}
+                  ฿ {item.price * item.count}
                 </div>
               </div>
             </div>
@@ -66,11 +82,32 @@ const ListCart = () => {
             <span className="font-bold capitalize">total net</span>
             <span className="text-2xl font-bold">{getTotalPrice()} ฿</span>
           </div>
-          <button className="btn btn-error capitalize">order now <BaggageClaim /></button>
+          {user ? (
+            <>
+              {/* order now button */}
+              <Link to={""}>
+                <button className="btn btn-block btn-error capitalize" onClick={handleSaveCart}>
+                  order now <BaggageClaim />
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* log in button */}
+              <Link to={"/login"}>
+                <button className="btn btn-block btn-secondary capitalize">
+                  log in <Key />
+                </button>
+              </Link>
+            </>
+          )}
+
+          {/* edit product button */}
           <Link to={"/shop"}>
-          <button className="btn btn-ghost capitalize btn-block">edit product <Gift /></button>
+            <button className="btn btn-ghost capitalize btn-block">
+              edit product <Gift />
+            </button>
           </Link>
-          
         </div>
       </div>
     </div>
